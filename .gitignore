@@ -1,0 +1,18 @@
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Go & Wasm
+control-plane/bin/
+*.exe
+*.wasm
+
+# Environment & Logs
+.env
+*.log
+*.csv
+*.db
