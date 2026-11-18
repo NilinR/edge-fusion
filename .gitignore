@@ -1,4 +1,3 @@
-
 # Python
 __pycache__/
 *.py[cod]
@@ -6,12 +5,8 @@ __pycache__/
 venv/
 .pytest_cache/
 
-# Go & Wasm
-control-plane/bin/
-*.exe
+# WebAssembly & Logs
 *.wasm
-
-# Environment & Logs
 .env
 *.log
 *.csv
