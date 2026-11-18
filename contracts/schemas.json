@@ -1,0 +1,62 @@
+{
+  "mqtt_topics": {
+    "telemetry_in": "edgefusion/telemetry",
+    "actuator_out": "edgefusion/actuate"
+  },
+  "mqtt_telemetry_in_example": {
+    "task_id": "req-1042",
+    "device_id": "arduino-uno-01",
+    "sensor_type": "ultrasonic",
+    "value": 14.2,
+    "payload_bytes": 128,
+    "sla_ms": 50,
+    "timestamp_ms": 1794990000123
+  },
+  "mqtt_actuator_out_example": {
+    "task_id": "req-1042",
+    "device_id": "arduino-uno-01",
+    "action": "TRIGGER_SERVO",
+    "servo_angle": 90,
+    "executed_on": "EDGE_WASM",
+    "total_latency_ms": 11.4
+  },
+  "scheduler_api": {
+    "endpoint": "POST http://127.0.0.1:8001/decide?mode=fusion",
+    "request_example": {
+      "task_id": "req-1042",
+      "rtt_cloud_ms": 24.5,
+      "edge_cpu_pct": 42.0,
+      "edge_queue_len": 1,
+      "payload_bytes": 128,
+      "sla_ms": 50
+    },
+    "response_example": {
+      "task_id": "req-1042",
+      "target": "EDGE_WASM",
+      "predicted_latency_ms": 11.2,
+      "ewma_rtt_ms": 24.5,
+      "reason": "EDGE_MEETS_SLA_FASTER"
+    }
+  },
+  "cloud_worker_api": {
+    "health_endpoint": "GET http://<CLOUD_VM_IP>:8000/health",
+    "execute_endpoint": "POST http://<CLOUD_VM_IP>:8000/execute",
+    "request_example": {
+      "task_id": "req-1042",
+      "device_id": "arduino-uno-01",
+      "sensor_type": "ultrasonic",
+      "value": 14.2,
+      "payload_bytes": 128,
+      "sla_ms": 50,
+      "sent_timestamp_ms": 1794990000123
+    },
+    "response_example": {
+      "task_id": "req-1042",
+      "is_anomaly": true,
+      "confidence": 0.94,
+      "action": "TRIGGER_SERVO",
+      "exec_time_ms": 6.8,
+      "worker_tier": "CLOUD_DOCKER"
+    }
+  }
+}
